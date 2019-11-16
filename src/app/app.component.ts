@@ -11,7 +11,7 @@ export class AppComponent implements OnInit {
   
   projectForm: FormGroup;
   public emailExist: boolean = false;
-  private statusControl: Array<string> = ['Stable','Critical','Finished'];
+  public statusControl: Array<string> = ['Stable','Critical','Finished'];
   private emailsControl: Array<string> = ['jean@gmail.com','paul@yahoo.fr','luffy@onepiece.net'];
 
   constructor(private formBuilder: FormBuilder) { }
@@ -87,6 +87,13 @@ export class AppComponent implements OnInit {
 
   public deletePartnerContols(index: number): void {
     (<FormArray>this.projectForm.get('project.partners')).removeAt(index);
+  }
+
+  /**
+   * return controls, it's necessary for the prod
+   */
+  get partnersControls() {
+    return (<FormArray>this.projectForm.get('project.partners'));
   }
 
   public onSubmit(): void {

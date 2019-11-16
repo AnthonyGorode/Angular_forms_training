@@ -67,7 +67,7 @@
                 <label for="partners">Partners</label>
                 <button type="button" class="btn btn-primary ml-4" (click)="createPartnerControls()">ADD</button>
               </div>
-              <div *ngFor="let partner of projectForm.get('project.partners').controls; let i = index">
+              <div *ngFor="let partner of partnersControls.controls; let i = index">
                 <div class="d-flex">
                   <input type="text" [formControlName]="i" class="mt-4">
                   <button type="button" class="btn btn-danger ml-4 mt-4" (click)="deletePartnerContols(i)">X</button>  
