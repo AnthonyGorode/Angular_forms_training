@@ -1,0 +1,95 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+      <h1 class="text-center">CREATE YOUR PROJECT</h1>
+      <form [formGroup]="projectForm" (ngSubmit)="onSubmit()">
+
+        <h2>About you</h2>
+        <div formGroupName="userData" class="group_input mb-4">
+
+          <div class="form-group">
+            <label for="firstName">FirstName</label>
+            <input type="text" id="firstName" class="form-control" formControlName="firstName">
+            <span
+              class="text-danger"
+              *ngIf="projectForm.get('userData.firstName').invalid && projectForm.get('userData.firstName').touched"
+            >Please enter a valid name</span>
+          </div>
+
+          <div class="form-group">
+            <label for="">LastName</label>
+            <input type="text" id="lastName" class="form-control" formControlName="lastName">
+            <span
+              class="text-danger"
+              *ngIf="projectForm.get('userData.lastName').invalid && projectForm.get('userData.lastName').touched"
+            >Please enter a valid name</span>
+          </div>
+
+          <div class="form-group">
+            <label for="">Email</label>
+            <input type="text" class="form-control" formControlName="email">
+            <span
+              class="text-danger"
+              *ngIf="projectForm.get('userData.email').invalid && projectForm.get('userData.email').touched && !emailExist"
+            >Please enter a valid email</span>
+            <span
+              class="text-danger"
+              *ngIf="projectForm.get('userData.email').invalid && projectForm.get('userData.email').touched && emailExist"
+            >Please use another mail</span>
+          </div>
+
+        </div>
+
+        <h2>About your project</h2>
+        <div formGroupName="project" class="group_input mb-4">
+
+          <div class="form-group">
+            <label for="">Project Name</label>
+            <input type="text" class="form-control" formControlName="projectName">
+            <span
+                class="text-danger"
+                *ngIf="projectForm.get('project.projectName').invalid && projectForm.get('project.projectName').touched"
+              >Please enter the name of your project</span>
+          </div>
+
+          <div class="form-group">
+            <label for="status">Status</label>
+            <select id="status" class="form-control" formControlName="status">
+              <option 
+              *ngFor="let statut of statusControl; let i = index"
+              value="{{ statut }}">{{ statut.toUpperCase() }}</option>
+            </select>
+          </div>
+
+          <div formArrayName="partners">
+            <div class="form-group">
+              <div class="d-flex">
+                <label for="partners">Partners</label>
+                <button type="button" class="btn btn-primary ml-4" (click)="createPartnerControls()">ADD</button>
+              </div>
+              <div *ngFor="let partner of projectForm.get('project.partners').controls; let i = index">
+                <div class="d-flex">
+                  <input type="text" [formControlName]="i" class="mt-4">
+                  <button type="button" class="btn btn-danger ml-4 mt-4" (click)="deletePartnerContols(i)">X</button>  
+                </div>
+                <span
+                  class="text-danger"
+                  *ngIf="projectForm.get('project.partners').invalid && projectForm.get('project.partners').touched"
+                >Please enter a partner</span>            
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="d-flex mb-4">
+          <button type="submit" class="btn btn-success" [disabled]="projectForm.invalid || projectForm.pending">SUBMIT</button>
+          <span
+            class="text-danger ml-4"
+            *ngIf="projectForm.valid"
+          ><img src="../assets/valid.png" alt="valid" width="30px" height="30px" /></span>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
