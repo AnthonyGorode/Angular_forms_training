@@ -82,17 +82,17 @@ export class AppComponent implements OnInit {
 
   public createPartnerControls(): void {
     const control = new FormControl(null, [Validators.required]);
-    (<FormArray>this.projectForm.get('project.partners')).push(control);
+    this.partnersControls.push(control);
   }
 
   public deletePartnerContols(index: number): void {
-    (<FormArray>this.projectForm.get('project.partners')).removeAt(index);
+    this.partnersControls.removeAt(index);
   }
 
   /**
-   * return controls, it's necessary for the prod
+   * return and change the type to the formControl on FormArray, it's necessary for the prod
    */
-  get partnersControls() {
+  get partnersControls(): FormArray {
     return (<FormArray>this.projectForm.get('project.partners'));
   }
 

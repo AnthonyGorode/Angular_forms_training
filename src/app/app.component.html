@@ -26,7 +26,7 @@
           </div>
 
           <div class="form-group">
-            <label for="">Email</label>
+            <label for="">Email</label><span *ngIf="projectForm.get('userData.email').pending"><img src="../assets/loading.gif" alt="loading" width="30px" height="30px"></span>
             <input type="text" class="form-control" formControlName="email">
             <span
               class="text-danger"
