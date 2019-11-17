@@ -17,7 +17,7 @@ export class AppComponent implements OnInit {
   constructor(private formBuilder: FormBuilder) { }
   
   ngOnInit(): void {
-    this.InitForm();
+    this.InitForm(); // or this.InitFormWithFormBuilder();
     this.statusChanged();
   }
 
